@@ -15,12 +15,12 @@ function ItemListContainer() {
   const params = useParams();
   const category = params.category;
 
-  const validCategories = ['celular', 'tablet', "notebook"];
-  useEffect(() => {
-    if (!validCategories.includes(category)) {
-      navigate('/errorPage');
-    }
-  }, [category, navigate]);
+  // const validCategories = ['celular', 'tablet', "notebook"];
+  // useEffect(() => {
+  //   if (!validCategories.includes(category)) {
+  //     navigate('/errorPage');
+  //   }
+  // }, [category, navigate]);
 
   useEffect(() => {
     setLoading(true);
