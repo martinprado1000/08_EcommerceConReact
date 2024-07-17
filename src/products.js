@@ -104,6 +104,7 @@ export const getProductsById = (id) => {
       setTimeout(()=>{
         const getProductById = products.find((product)=> product.id === id)
           res(getProductById)
+
       },1000)
   })
 };
@@ -113,6 +114,7 @@ export const getProductsByCategory = (category) => {
       setTimeout(()=>{
         const getProductByCategory = products.filter((product)=> product.category === category)
           res(getProductByCategory)
+          rej("Esa categoria no existe")
       },500)
   })
 };

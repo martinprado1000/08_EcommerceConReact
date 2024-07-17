@@ -20,7 +20,9 @@ const ErrorUrl = () => {
           Error 404: URL inexistente
         </h2>
         <div className="d-flex justify-content-center mt-3">
-          <Button onClick={() => navigate("/")}>Volver al inicio</Button>
+          <Button onClick={() => {
+            navigate("/")}
+            }>Volver al inicio</Button>
         </div>
       </Row>
     </Container>
