@@ -2,8 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import { useProductsContext } from "../../contexts/ProductsContext";
 
-const Item = ({ id, brand, model, category, price, img, stock, description }) => {
+const Item = (product) => {
+  //const { products, setProducts, getProducts, getProductsByCategory } = useProductsContext()
+  const { id, brand, model, category, price, img, stock, description } = product
 
   const isSmallScreen = useMediaQuery({ query: '(max-width: 576px)' });
   

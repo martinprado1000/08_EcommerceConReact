@@ -1,4 +1,4 @@
-const products = [
+export const products = [
   {
     id: "1",
     brand: "Celular Samsung",
@@ -91,7 +91,10 @@ const products = [
   },
 ];
 
-export const getProducts = () => {
+export const carts = [{
+}]
+
+export const getProductsFn = () => {
     return new Promise((res,rej)=>{
         setTimeout(()=>{
             res(products)
@@ -99,22 +102,21 @@ export const getProducts = () => {
     })
 };
 
-export const getProductsById = (id) => {
+export const getProductsByIdFn = (id) => {
   return new Promise((res,rej)=>{
       setTimeout(()=>{
         const getProductById = products.find((product)=> product.id === id)
           res(getProductById)
-
-      },1000)
+      },0)
   })
 };
 
-export const getProductsByCategory = (category) => {
+export const getProductsByCategoryFn = (category) => {
   return new Promise((res,rej)=>{
       setTimeout(()=>{
         const getProductByCategory = products.filter((product)=> product.category === category)
           res(getProductByCategory)
           rej("Esa categoria no existe")
-      },500)
+      },0)
   })
 };

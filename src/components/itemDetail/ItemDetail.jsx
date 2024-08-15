@@ -1,32 +1,25 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemCount from "../itemCount/ItemCount";
-import { getProductsById } from "../../products";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/esm/Button"; 
-import { useNavigate } from "react-router-dom"; 
+import Button from "react-bootstrap/esm/Button";
+import { useNavigate } from "react-router-dom";
+
+import { useProductsContext } from "../../contexts/ProductsContext";
 
 const ItemDetail = () => {
-  const navigate = useNavigate()
+  const { getProductsById, productById, loading } = useProductsContext();
+  const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
 
-  const [loading, setLoading] = useState(true);
-  const [productId, setProductId] = useState({});
-
-  // getProductsById(id).then((data)=>data.JSON()).then((data)=>console.log(data))
   useEffect(() => {
-    getProductsById(id)
-      .then((data) => {
-        setLoading(false);
-        setProductId(data);
-      })
-      .catch((err) => console.log(err));
+    getProductsById(id);
   }, []);
 
   return (
@@ -40,7 +33,7 @@ const ItemDetail = () => {
         </>
       ) : (
         <>
-          {productId == undefined ? (
+          {productById == undefined ? (
             <Container>
               <h2 className="d-flex justify-content-center">
                 Producto inexistente
@@ -61,7 +54,7 @@ const ItemDetail = () => {
                 <Row className="justify-content-center">
                   <Col className="d-flex align-items-center justify-content-center">
                     <Image
-                      src={productId.img}
+                      src={productById.img}
                       thumbnail
                       className="border-0"
                       style={{ objectFit: "contain", height: "300px" }}
@@ -70,46 +63,44 @@ const ItemDetail = () => {
                 </Row>
                 <Row className="justify-content-center">
                   <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3">
                       <Form.Label>Marca:</Form.Label>
                       <Form.Control
                         type="brand"
-                        value={productId.brand}
+                        value={productById.brand}
                         disabled
                       />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3">
                       <Form.Label>Modelo: </Form.Label>
                       <Form.Control
                         type="description"
-                        value={productId.model}
+                        value={productById.model}
                         disabled
                       />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3">
                       <Form.Label>Descripción: </Form.Label>
                       <Form.Control
                         type="description"
-                        value={productId.description}
+                        value={productById.description}
                         disabled
                       />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3">
                       <Form.Label>Precio: </Form.Label>
                       <Form.Control
                         type="description"
-                        value={`$ ${productId.price}`}
+                        value={`$ ${productById.price}`}
                         disabled
                       />
                     </Form.Group>
+
                     <ItemCount
                       className="d-flex justify-content-center"
-                      initial={1}
-                      stock={productId.stock}
-                      onAdd={(cant) => {
-                        console.log(`Cantidad agregada:${cant}`);
-                      }}
+                      productById={productById} 
                     />
+
                   </Form>
                 </Row>
               </Row>
