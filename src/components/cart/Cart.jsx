@@ -4,8 +4,6 @@ import { useProductsContext } from "../../contexts/ProductsContext";
 
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 //Sweet Alert 2
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
@@ -13,7 +11,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 const Cart = () => {
   const { products } = useProductsContext();
 
-  const { userCart, deleteProductsCart } = useUsersContext();
+  const { userCart, deleteProductsCart, deleteOneProductsCart } = useUsersContext();
 
   let cartWithDetails = [];
 
@@ -45,14 +43,14 @@ const Cart = () => {
           <Table striped bordered hover variant="dark" className="">
             <thead>
               <tr className="row">
-                <th className="col-3">Marca</th>
-                <th className="col-1">Modelo</th>
+                <th className="col-4">Marca</th>
+                <th className="col-2">Modelo</th>
                 <th className="col-1">Imagen</th>
                 <th className="col-1">Precio</th>
                 <th className="col-1">Stock</th>
                 <th className="col-1">Quantity</th>
-                <th className="col-3"></th>
-                <th className="col-1"></th>
+                {/* <th className="col-3"></th> */}
+                <th className="col-2"></th>
               </tr>
             </thead>
 
@@ -60,15 +58,15 @@ const Cart = () => {
               {cartWithDetails &&
                 cartWithDetails.map((products) => (
                   <tr className="row" key={products.id}>
-                    <td className="col-3">{products.brand}</td>
-                    <td className="col-1">{products.model}</td>
+                    <td className="col-4">{products.brand}</td>
+                    <td className="col-2">{products.model}</td>
                     <td className="col-1">
                       <img style={{ height: "30px" }} src={products.img} />
                     </td>
                     <td className="col-1">{products.price}</td>
                     <td className="col-1">{products.stock}</td>
                     <td className="col-1">{products.quantity}</td>
-                    <td className="col-3">
+                    {/* <td className="col-3">
                       <Form
                         onSubmit={
                           (e) => console.log("hola")
@@ -77,7 +75,7 @@ const Cart = () => {
                       >
                         <InputGroup size="sm">
                           <Form.Control
-                            value="test" //{editQuantity || ""} // agrego || '' para que no arroje error al renderizar si editQuantity no tiene ningun valor.
+                            value="test"
                             type="number"
                             placeholder="Cantidad"
                             //onChange={(e) => setEditQuantity(e.target.value)}
@@ -87,11 +85,11 @@ const Cart = () => {
                           </Button>
                         </InputGroup>
                       </Form>
-                    </td>
-                    <td className="col-1">
+                    </td> */}
+                    <td className="col-2">
                       <button
                         className="btn btn-danger btn-sm d-block mx-auto"
-                        //onClick={() => handleDelite(products.product._id)}
+                        onClick={() => deleteOneProductsCart(products.id)}
                       >
                         Eliminar
                       </button>

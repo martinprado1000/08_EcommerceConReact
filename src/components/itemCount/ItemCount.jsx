@@ -42,8 +42,6 @@ const ModalAlertLogin = ({ showLogin, handleCloseLogin }) => {
 const ItemCount = ({productById}) => {
   const productId = productById.id;
   const stock = productById.stock;
-  //console.log(productId)
-  //console.log(stock)
   const { isLogged,addProductToCart } = useUsersContext();
  
   // Estado del modal

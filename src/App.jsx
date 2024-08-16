@@ -10,7 +10,7 @@ import CartPage from "./pages/cartPage";
 
 import { UsersProvider } from "./contexts/UsersContext";
 import { ProductsProvider } from "./contexts/ProductsContext";
-import { CartsProvider } from "./contexts/CartsContext";
+//import { CartsProvider } from "./contexts/CartsContext";
 
 function App() {
   return (
@@ -18,7 +18,6 @@ function App() {
     <BrowserRouter>
         <UsersProvider>
           <ProductsProvider>
-            <CartsProvider>
                 <Routes>
                   <Route path="/" element={<HomePage />}></Route>
                   <Route path="/home" element={<HomePage />}></Route>
@@ -30,7 +29,6 @@ function App() {
                   <Route path="/test" element={<Test />}></Route>
                   <Route path="/*" element={<ErrorPage />}></Route>
                 </Routes>
-            </CartsProvider>
           </ProductsProvider>
         </UsersProvider>
     </BrowserRouter>

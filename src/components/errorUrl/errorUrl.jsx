@@ -4,12 +4,6 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/esm/Row";
 
-// import { useNavigate } from "react-router-dom";
-// const navigate = useNavigate();
-// const handleClick = (()=>{
-//      navigate("/home")
-// })
-
 const ErrorUrl = () => {
   const navigate = useNavigate();
 

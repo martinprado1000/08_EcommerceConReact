@@ -14,11 +14,9 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import { useUsersContext } from "../../contexts/UsersContext";
-import { useCartsContext } from "../../contexts/CartsContext";
 
 function Register() {
   const { getUsers, addUser, setIsLogged, setUserLogged, } = useUsersContext();
-  const { createCart } = useCartsContext
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,9 +33,6 @@ function Register() {
     setValue, // Le asigna el valor que le asignemos a un input, ej: setValue("email","")
   } = useForm({
     defaultValues: {
-      // Con defaultValues le podemos asignar valores por defecto al campo que deseamos, si no queremos asignar ningun valor por defecto ejecuto el useForm sin ningun valor: useForm();
-      //marca: marcaEdit
-      //apellido: '',
     },
   });
 
@@ -51,7 +46,7 @@ function Register() {
       if (res.status === 401) {
         Swal.fire({
           title: res.data,
-          icon: "warning", // succes , warning , info , question, error
+          icon: "warning", 
           timer: 3000,
           timerProgressBar: true,
         });
@@ -59,7 +54,7 @@ function Register() {
       } else {
         Swal.fire({
           title: res.data,
-          icon: "error", // succes , warning , info , question, error
+          icon: "error", 
           timer: 3000,
           timerProgressBar: true,
         });
@@ -214,14 +209,6 @@ function Register() {
                 value: true,
                 message: "El campo repetir contraseña es requerido",
               },
-              // validate: (value) => {  // Validate: Valida nuestra propia funcion, validate es una funcion.
-              //   if(value == watch("password")){  // Watch("password"), obtenemos el valor actual de la variable password.
-              //     return true
-              //   } else {
-              //     return "Las contraseñas no coinciden"
-              //   }
-              // }
-              /////// Esto de a continuacion es lo mismo que lo anterios ////
               validate: (value) =>
                 value == watch("password") || "Las contraseñas no coinciden",
             })}

@@ -21,11 +21,6 @@ const ModalInitSesion = ({ show, handleClose }) => {
   const { login, getTotalAmount } = useUsersContext();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   getTotalAmount()
-  // }, [])
-  
-
   const {
     register,
     formState: { errors }, // Son los valores del objeto error
@@ -36,9 +31,6 @@ const ModalInitSesion = ({ show, handleClose }) => {
     setValue, // Le asigna el valor que le asignemos a un input, ej: setValue("email","")
   } = useForm({
     defaultValues: {
-      // Con defaultValues le podemos asignar valores por defecto al campo que deseamos, si no queremos asignar ningun valor por defecto ejecuto el useForm sin ningun valor: useForm();
-      //marca: marcaEdit
-      //apellido: '',
     },
   });
 
@@ -151,13 +143,11 @@ function NavbarLogIn() {
   const location = useLocation();
   const currentLocation = location.pathname;
 
-  const { isLogged, userLogged, login, setIsLogged, handleLogin, totalAmount, setTotalAmount, getTotalAmount } = useUsersContext();
+  const { isLogged, userLogged, handleLogin, totalAmount, getTotalAmount } = useUsersContext();
 
   useEffect(() => {
     getTotalAmount(userLogged.idCart)
-    // Renderizo para que tome el cambio de estado del userLogged
   }, [totalAmount]);
-
 
   // Estado del modal
   const [show, setShow] = useState(false);

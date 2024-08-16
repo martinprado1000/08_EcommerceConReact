@@ -9,7 +9,7 @@ import {
   addDoc,
   updateDoc,
   arrayUnion,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 import { dbFirestore } from "../db/db.jsx";
 import { useNavigate } from "react-router-dom";
@@ -181,7 +181,7 @@ export function UsersProvider({ children }) {
             data: "Usuario Logueado satisfactoriamente",
           };
         } else {
-          console.log("Password incorrecto")
+          console.log("Password incorrecto");
           return {
             status: 401,
             data: "Usuario o password incorrectos",
@@ -191,7 +191,7 @@ export function UsersProvider({ children }) {
       if (userId.status == false) {
         setIsLogged(false);
         setUserLogged({});
-        console.log("Usuario incorrecto")
+        console.log("Usuario incorrecto");
         return {
           status: 401,
           data: "Usuario o password incorrectos",
@@ -292,10 +292,10 @@ export function UsersProvider({ children }) {
         timer: 3000,
         timerProgressBar: true,
       });
-        navigate("/");
-        return {
-          status: 200,
-        };
+      navigate("/");
+      return {
+        status: 200,
+      };
     } catch (e) {
       return {
         status: 500,
@@ -304,6 +304,36 @@ export function UsersProvider({ children }) {
     }
   };
 
+  const deleteOneProductsCart = async (productId) => {
+    try {
+      const cartId = userCart[0].idCart;
+
+      const cartRef = doc(dbFirestore, "carts", cartId);
+      const cartSnap = await getDoc(cartRef);
+      if (cartSnap.exists()) {
+        const cartData = cartSnap.data();
+        const updatedProducts = cartData.products.filter(
+          (item) => item.product !== productId
+        );
+        await updateDoc(cartRef, { products: updatedProducts });
+        Swal.fire({
+          title: "Producto eliminado correctamente",
+          icon: "success",
+          timer: 2000,
+          timerProgressBar: true,
+        });
+        navigate("/");
+        console.log("Producto eliminado correctamente");
+      } else {
+        console.log("El carrito no existe");
+      }
+    } catch (e) {
+      return {
+        status: 500,
+        data: `Error en el sistema: ${e}`,
+      };
+    }
+  };
   return (
     <UsersContext.Provider
       value={{
@@ -321,7 +351,8 @@ export function UsersProvider({ children }) {
         addProductToCart,
         getTotalAmount,
         totalAmount,
-        deleteProductsCart
+        deleteProductsCart,
+        deleteOneProductsCart,
       }}
     >
       {children}
