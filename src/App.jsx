@@ -7,10 +7,8 @@ import ErrorPage from "./pages/errorPage";
 import RegisterPage from "./pages/registerPage";
 import CartPage from "./pages/cartPage";
 
-
 import { UsersProvider } from "./contexts/UsersContext";
 import { ProductsProvider } from "./contexts/ProductsContext";
-//import { CartsProvider } from "./contexts/CartsContext";
 
 function App() {
   return (
